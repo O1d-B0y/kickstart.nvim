@@ -54,11 +54,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
-vim.filetype.add {
-    shader = 'hlsl',
-    hlsl = 'hlsl',
-}
-
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -387,7 +382,7 @@ require('lazy').setup({
                                 callSnippet = 'Replace',
                             },
                             -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                            -- diagnostics = { disable = { 'missing-fields' } },
+                            diagnostics = { disable = { 'missing-fields' } },
                         },
                     },
                 },
