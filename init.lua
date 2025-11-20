@@ -31,7 +31,6 @@ vim.o.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.o.inccommand = 'split'
 vim.o.cursorline = true
-vim.o.guicursor = 'n-v-c-sm:hor25,i-ci-ve:hor85,o:hor50,a:Cursor/lCursor'
 vim.o.termguicolors = true
 vim.o.scrolloff = 20
 vim.o.confirm = true
@@ -54,6 +53,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
         vim.hl.on_yank()
     end,
 })
+
+vim.filetype.add {
+    shader = 'hlsl',
+    hlsl = 'hlsl',
+}
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -549,6 +553,7 @@ require('lazy').setup({
                     return {
                         Cursor = { fg = colors.palette.dragonGreen },
                         lCursor = { fg = colors.palette.autumnGreen },
+                        nCursor = { fg = colors.palette.winterGreen },
                     }
                 end,
             }
@@ -575,15 +580,31 @@ require('lazy').setup({
             -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
             -- - sd'   - [S]urround [D]elete [']quotes
             -- - sr)'  - [S]urround [R]eplace [)] [']
-            require('mini.surround').setup()
+            require('mini.surround').setup {}
         end,
     },
     {
         'nvim-treesitter/nvim-treesitter',
-        build = ':TSUpdate',
-        main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+        build = ':tsupdate',
+        main = 'nvim-treesitter.configs', -- sets main module to use for opts
         opts = {
-            ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'python', 'rust' },
+            ensure_installed = {
+                'bash',
+                'c',
+                'diff',
+                'html',
+                'lua',
+                'luadoc',
+                'markdown',
+                'markdown_inline',
+                'query',
+                'vim',
+                'vimdoc',
+                'python',
+                'rust',
+                'hlsl',
+                'gshader',
+            },
             auto_install = true,
             highlight = {
                 enable = true,
